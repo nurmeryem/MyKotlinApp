@@ -3,9 +3,12 @@ package com.example.mykotlinapp.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mykotlinapp.R
 import com.example.mykotlinapp.model.CountryModel
+import com.example.mykotlinapp.view.FeedFragment
+import com.example.mykotlinapp.view.FeedFragmentDirections
 import kotlinx.android.synthetic.main.item_country.view.*
 
 class CountryAdapter (val countryList: ArrayList<CountryModel>) : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>(){
@@ -24,6 +27,11 @@ class CountryAdapter (val countryList: ArrayList<CountryModel>) : RecyclerView.A
      // viewdeki elementlerimize erişebiliyoruz..
         holder.view.name.text = countryList[position].countryName
         holder.view.region.text = countryList[position].countryRegion
+
+        holder.view.setOnClickListener{
+            val action = FeedFragmentDirections.actionFeedFragmentToCountryFragment()
+            Navigation.findNavController(it).navigate(action)
+        }
     }
 
     override fun getItemCount(): Int {
