@@ -41,6 +41,14 @@ class FeedFragment : Fragment() {
         countryList.layoutManager = LinearLayoutManager(context)
         countryList.adapter = countryAdapter
 
+        swipeRefreshLayout.setOnRefreshListener { // kullanıcı refresh ettiğinde ne olacağını buraya yazıyoruz.
+            countryList.visibility = View.GONE
+            countryError.visibility = View.GONE
+            countryLoading.visibility = View.VISIBLE
+
+            viewModel.refreshData()
+            swipeRefreshLayout.isRefreshing = false // yukarıda çıkan loading i iptal ediyoruz
+        }
         observeLiveData()
 
         /*fragmentButton.setOnClickListener {
@@ -50,7 +58,7 @@ class FeedFragment : Fragment() {
     }
 
     fun observeLiveData() { // değişiklik olduğunda gözlemleyip değişikliği gostereceğiz.
-        viewModel.countries.observe(viewLifecycleOwner, Observer { countries ->
+        viewModel.countries.observe(viewLifecycleOwner,  Observer { countries ->
             countries?.let {
                 countryList.visibility = View.VISIBLE
                 countryAdapter.uptadeCountryList(countries)
