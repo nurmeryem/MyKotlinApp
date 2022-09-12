@@ -2,6 +2,7 @@ package com.example.mykotlinapp.util
 
 import android.content.Context
 import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.GlideContext
@@ -35,4 +36,8 @@ fun placeHolderProgressBar(context: Context): CircularProgressDrawable {
         centerRadius = 40f
         start()
     }
+}
+@BindingAdapter("android:downloadUrl") // xml de çalıştırmamıza olanak sağlıyor.
+fun downloadImage(view: ImageView, url:String?) {
+    view.downloadFromUrl(url, placeHolderProgressBar(view.context))
 }
