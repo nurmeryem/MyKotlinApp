@@ -31,10 +31,10 @@ class CountryAdapter (val countryList: ArrayList<CountryModel>) : RecyclerView.A
         holder.view.region.text = countryList[position].countryRegion
 
         holder.view.setOnClickListener{
-            val action = FeedFragmentDirections.actionFeedFragmentToCountryFragment()
+            val action = FeedFragmentDirections.actionFeedFragmentToCountryFragment(countryList[position].uuid )
             Navigation.findNavController(it).navigate(action)
         }
-        holder.view.imageView.downloadFromUrl(countryList[position].imageUrl, placeHolderProgressBar(holder.view.context))
+        holder.view.imageView.downloadFromUrl(countryList[position].countryImageUrl, placeHolderProgressBar(holder.view.context))
     }
 
     override fun getItemCount(): Int {
